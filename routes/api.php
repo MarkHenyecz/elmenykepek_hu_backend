@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix("user")->group(function() {
     Route::post("register", [UserController::class, 'register'])->name('user.register');
     Route::post("login", [UserController::class, 'login'])->name('user.login');
+});
+
+Route::prefix("post")->group(function() {
+    Route::get("", [PostController::class, 'getPosts'])->name('posts.get');
+    Route::get("{id}", [PostController::class, 'getPost'])->name('post.get');
+
+    Route::middleware('auth:sanctum')->post("", [PostController::class, 'createPost'])->name('post.create');
 });
 
 Route::middleware('auth:sanctum')

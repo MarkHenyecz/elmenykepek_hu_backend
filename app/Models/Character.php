@@ -26,4 +26,8 @@ class Character extends Model
     public function profilePicture() {
         return $this->hasOne(File::class, 'id', 'picture_id');
     }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
 }
