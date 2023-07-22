@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function files() {
         return $this->hasMany(File::class);
     }
+
+    public function characters() {
+        return $this->hasMany(Character::class);
+    }
 }

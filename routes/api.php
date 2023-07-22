@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -25,5 +26,11 @@ Route::middleware('auth:sanctum')
 ->group(function() {
     Route::prefix("file")->group(function() {
         Route::post("upload", [FileController::class, 'uploadFile'])->name('file.upload');
+    });
+
+    Route::prefix("character")->group(function() {
+        Route::post("", [CharacterController::class, 'createCharacter'])->name('character.create');
+        Route::get("", [CharacterController::class, 'getCharacters'])->name('characters.get');
+        Route::get("{id}", [CharacterController::class, 'getCharacter'])->name('character.get');
     });
 });
