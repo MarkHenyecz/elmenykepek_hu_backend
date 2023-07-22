@@ -23,22 +23,24 @@ Route::prefix("user")->group(function() {
     Route::post("login", [UserController::class, 'login'])->name('user.login');
 });
 
+Route::prefix("character")->group(function() {
+    Route::get("", [CharacterController::class, 'getCharacters'])->name('characters.get');
+    Route::get("{id}", [CharacterController::class, 'getCharacter'])->name('character.get');
+
+    Route::middleware('auth:sanctum')
+    ->post("", [CharacterController::class, 'createCharacter'])->name('character.create');
+});
+
 Route::prefix("post")->group(function() {
     Route::get("", [PostController::class, 'getPosts'])->name('posts.get');
     Route::get("{id}", [PostController::class, 'getPost'])->name('post.get');
 
-    Route::middleware('auth:sanctum')->post("", [PostController::class, 'createPost'])->name('post.create');
+    Route::middleware('auth:sanctum')
+    ->post("", [PostController::class, 'createPost'])->name('post.create');
 });
 
 Route::middleware('auth:sanctum')
+->prefix("file")
 ->group(function() {
-    Route::prefix("file")->group(function() {
-        Route::post("upload", [FileController::class, 'uploadFile'])->name('file.upload');
-    });
-
-    Route::prefix("character")->group(function() {
-        Route::post("", [CharacterController::class, 'createCharacter'])->name('character.create');
-        Route::get("", [CharacterController::class, 'getCharacters'])->name('characters.get');
-        Route::get("{id}", [CharacterController::class, 'getCharacter'])->name('character.get');
-    });
+    Route::post("upload", [FileController::class, 'uploadFile'])->name('file.upload');
 });
