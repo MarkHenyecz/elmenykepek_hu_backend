@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "laravel/vapor-core": "^2.31",
         "league/flysystem-aws-s3-v3": "^3.15",
         "webpatser/laravel-uuid": "^4.0"
     },
