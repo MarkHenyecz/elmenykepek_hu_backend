@@ -36,6 +36,6 @@ class FileController extends Controller
         if(is_null($file))
             return response('', 404);
 
-        return ['url' => $file?->getUrl()];
+        return ['url' => $file?->getUrlAttribute()];
     }
 }

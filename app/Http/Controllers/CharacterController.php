@@ -37,11 +37,11 @@ class CharacterController extends Controller
     }
 
     public function getCharacters() {
-        return request()->user()->characters;
+        return request()->user()->characters->load(['profilePicture', 'posts.images.image']);
     }
 
     public function getCharacter(int $id) {
-        $character = Character::where('id', $id)->first();
+        $character = Character::with(['profilePicture', 'posts.images.image'])->find($id);
 
         if(is_null($character))
             return response('', 404);

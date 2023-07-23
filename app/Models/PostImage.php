@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostImage extends Model
 {
+    protected $hidden = [
+        'id',
+        'post_id',
+        'image_id',
+        'created_at',
+        'updated_at',
+    ];
+
     public function post() {
         return $this->belongsTo(Post::class);
     }

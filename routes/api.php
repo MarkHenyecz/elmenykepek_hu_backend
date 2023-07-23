@@ -24,7 +24,8 @@ Route::prefix("user")->group(function() {
 });
 
 Route::prefix("character")->group(function() {
-    Route::get("", [CharacterController::class, 'getCharacters'])->name('characters.get');
+    Route::middleware('auth:sanctum')->
+    get("", [CharacterController::class, 'getCharacters'])->name('characters.get');
     Route::get("{id}", [CharacterController::class, 'getCharacter'])->name('character.get');
 
     Route::middleware('auth:sanctum')
