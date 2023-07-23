@@ -10,6 +10,21 @@ use Webpatser\Uuid\Uuid;
 
 class File extends Model
 {
+    protected $hidden = [
+        'user_id',
+        'region',
+        'bucket',
+        'key',
+        'is_public',
+        'is_backedup',
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $appends = [
+        'url'
+    ];
+
     public function uploadFile(UploadedFile $file, int $user_id) {
         $this->user_id = $user_id;
         $path = 'misc';
@@ -30,7 +45,7 @@ class File extends Model
         $this->is_public = true;
     }
 
-    public function getUrl() {
+    public function getUrlAttribute() {
         $s3 = Storage::disk('s3')->getClient();
 
         if($this->is_public) {
