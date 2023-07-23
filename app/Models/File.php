@@ -27,13 +27,17 @@ class File extends Model
         $this->region = env('AWS_DEFAULT_REGION');
         $this->bucket = env('AWS_BUCKET');
         $this->key = $fullPath.'/'.$fileName;
-        $this->is_public = false;
+        $this->is_public = true;
     }
 
     public function getUrl() {
         $s3 = Storage::disk('s3')->getClient();
 
-        return $s3->temporaryUrl( $this->bucket, $this->key, now()->addMinutes(10) );
+        if($this->is_public) {
+            return $s3->getObjectUrl( $this->bucket, $this->key );
+        } else {
+            return $s3->temporaryUrl( $this->bucket, $this->key, now()->addMinutes(10) );
+        }
     }
 
     public function user() {

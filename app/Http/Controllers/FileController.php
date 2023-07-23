@@ -29,4 +29,13 @@ class FileController extends Controller
 
         return $dbFile;
     }
+
+    public function getFileUrl(int $id) {
+        $file = File::find($id);
+
+        if(is_null($file))
+            return response('', 404);
+
+        return ['url' => $file?->getUrl()];
+    }
 }

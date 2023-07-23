@@ -39,8 +39,9 @@ Route::prefix("post")->group(function() {
     ->post("", [PostController::class, 'createPost'])->name('post.create');
 });
 
-Route::middleware('auth:sanctum')
-->prefix("file")
-->group(function() {
-    Route::post("upload", [FileController::class, 'uploadFile'])->name('file.upload');
+Route::prefix("file")->group(function() {
+    Route::get('{id}', [FileController::class, 'getFileUrl'])->name('file.geturl');
+
+    Route::middleware('auth:sanctum')
+    ->post("upload", [FileController::class, 'uploadFile'])->name('file.upload');
 });
