@@ -52,4 +52,17 @@ class UserController extends Controller
 
         return ['token' => $token->plainTextToken];
     }
+
+    public function getProfile() {
+        return request()->user()->load(['characters.posts', 'characters.profilePicture']);
+    }
+
+    public function getUserProfile(string $userName) {
+        $user = User::where('name', $userName)->first();
+
+        if(is_null($user))
+            return response('', 404);
+
+        return $user->load(['characters.posts', 'characters.profilePicture']);
+    }
 }

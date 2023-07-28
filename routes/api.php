@@ -21,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::prefix("user")->group(function() {
     Route::post("register", [UserController::class, 'register'])->name('user.register');
     Route::post("login", [UserController::class, 'login'])->name('user.login');
+
+    Route::middleware('auth:sanctum')->
+    get("", [UserController::class, 'getProfile'])->name('user.get.myprofile');
+    
+    Route::middleware('auth:sanctum')->
+    get("{userName}", [UserController::class, 'getUserProfile'])->name('user.get');
 });
 
 Route::prefix("character")->group(function() {
