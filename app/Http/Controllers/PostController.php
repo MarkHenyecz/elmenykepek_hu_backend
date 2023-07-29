@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     private function getQuery() {
         return Post::query()
-            ->with(['images.image', 'character.profilePicture']);
+            ->with(['images.image', 'character.profilePicture', 'character.user']);
     }
 
     public function createPost(Request $request) {

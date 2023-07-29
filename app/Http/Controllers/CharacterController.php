@@ -41,7 +41,7 @@ class CharacterController extends Controller
     }
 
     public function getCharacter(int $id) {
-        $character = Character::with(['profilePicture', 'posts.images.image', 'posts.character.profilePicture'])->find($id);
+        $character = Character::with(['profilePicture', 'posts.images.image', 'posts.character.profilePicture', 'posts.character.user'])->find($id);
 
         if(is_null($character))
             return response('', 404);
