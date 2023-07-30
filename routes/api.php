@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -50,4 +51,11 @@ Route::prefix("file")->group(function() {
 
     Route::middleware('auth:sanctum')
     ->post("upload", [FileController::class, 'uploadFile'])->name('file.upload');
+});
+
+Route::prefix("like")->group(function() {
+    Route::get('{id}', [LikeController::class, 'getLikes'])->name('like.get');
+
+    Route::middleware('auth:sanctum')
+    ->post("{id}", [LikeController::class, 'like'])->name('like.post');
 });
