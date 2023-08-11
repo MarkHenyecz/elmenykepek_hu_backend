@@ -24,4 +24,16 @@ class Post extends Model
     public function images() {
         return $this->hasMany(PostImage::class);
     }
+
+    public function likes() {
+        return $this->hasMany(Like::class, 'liked_id', 'id')->where('liked_type', this::class);
+    }
+
+    protected $appends = [
+        'likes'
+    ];
+
+    public function getLikesAttribute() {
+        return $this->likes()->count();
+    }
 }
