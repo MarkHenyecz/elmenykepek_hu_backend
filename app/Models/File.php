@@ -39,8 +39,8 @@ class File extends Model
         $file->storeAs($fullPath, $fileName, 's3');
 
         $this->name = $file->getClientOriginalName();
-        $this->region = env('AWS_DEFAULT_REGION');
-        $this->bucket = env('AWS_BUCKET');
+        $this->region = env('AWS_DEFAULT_REGION', 'eu-central-1');
+        $this->bucket = env('AWS_BUCKET', 'elmenykepekhu');
         $this->key = $fullPath.'/'.$fileName;
         $this->is_public = true;
     }
