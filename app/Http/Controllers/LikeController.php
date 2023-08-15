@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\LikeTypeEnum;
 use App\Models\Like;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
@@ -12,7 +13,7 @@ class LikeController extends Controller
 {
     public function like(Request $request, int $id) {
         $validated = $request->validate([
-            'liked_type' => ['required', new Enum(LikeTypeEnum::class)],
+            'liked_type' => ['required', 'in:'. implode(',', Like::possibleTypes)],
         ]);
 
         $alreadyLiked = Like::where(
@@ -38,7 +39,7 @@ class LikeController extends Controller
 
     public function getLikes(Request $request, int $id) {
         $validated = $request->validate([
-            'liked_type' => ['required', new Enum(LikeTypeEnum::class)],
+            'liked_type' => ['required', 'in:'. implode(',', Like::possibleTypes)],
         ]);
 
         $query = Like::query()->where([['liked_type', $validated['liked_type']],['liked_id', $id]]);

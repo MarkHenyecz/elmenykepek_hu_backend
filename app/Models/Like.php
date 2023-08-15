@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+    const possibleTypes = [
+        Post::class,
+    ];
+
     protected $fillable = [
         'liked_id', 
         'liked_type', 
