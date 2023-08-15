@@ -26,7 +26,7 @@ class Post extends Model
     }
 
     public function likes() {
-        return $this->hasMany(Like::class, 'liked_id', 'id')->where('liked_type', this::class);
+        return $this->hasMany(Like::class, 'liked_id', 'id')->where('liked_type', Post::class);
     }
 
     protected $appends = [
