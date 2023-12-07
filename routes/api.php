@@ -40,6 +40,8 @@ Route::prefix("character")->group(function() {
 
 Route::prefix("post")->group(function() {
     Route::get("", [PostController::class, 'getPosts'])->name('posts.get');
+    Route::middleware('auth:sanctum')->
+    get("/authorized", [PostController::class, 'getPosts'])->name('posts.get.authorized');
     Route::get("{id}", [PostController::class, 'getPost'])->name('post.get');
 
     Route::middleware('auth:sanctum')

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -30,10 +31,19 @@ class Post extends Model
     }
 
     protected $appends = [
-        'likes'
+        'likes',
+        'isLiked',
     ];
 
     public function getLikesAttribute() {
         return $this->likes()->count();
+    }
+
+    public function getIsLikedAttribute() {
+        $user = Auth::user();
+        if(!$user)
+            return false;
+
+        return $this->likes()->where('user_id', $user->id)->exists();
     }
 }
