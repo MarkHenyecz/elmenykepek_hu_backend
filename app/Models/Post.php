@@ -40,7 +40,7 @@ class Post extends Model
     }
 
     public function getIsLikedAttribute() {
-        $user = Auth::user();
+        $user = auth('sanctum')->user();
         if(!$user)
             return false;
 
