@@ -8,6 +8,7 @@ jobs:
   deploy:
     # runs-on: ubuntu-latest
     runs-on: [self-hosted, linux]
+    needs: test
     steps:
       - uses: actions/checkout@v3
 
