@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Character extends Model
 {
+    use HasFactory;
+
     protected $hidden = [
         'user_id',
         'picture_id',
