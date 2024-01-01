@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\FileController;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +11,8 @@ use Webpatser\Uuid\Uuid;
 
 class File extends Model
 {
+    use HasFactory;
+
     protected $hidden = [
         'user_id',
         'region',
