@@ -2,21 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Resources\FileResource\Pages;
+use App\Filament\Resources\FileResource\RelationManagers;
+use App\Models\File;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Webbingbrasil\FilamentDateFilter\DateFilter;
 
-class UserResource extends Resource
+class FileResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = File::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -24,8 +28,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('email')->email()->required(),
+                //
             ]);
     }
 
@@ -33,16 +36,20 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('created_at'),
+                ImageColumn::make('url'),
+                TextColumn::make('user.name'),
+                TextColumn::make('created_at'),
             ])
             ->filters([
+                SelectFilter::make('user')
+                    ->relationship('user', 'name'),
                 DateFilter::make('created_at')
                     ->range(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
@@ -56,8 +63,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListFiles::route('/'),
         ];
     }    
 }
