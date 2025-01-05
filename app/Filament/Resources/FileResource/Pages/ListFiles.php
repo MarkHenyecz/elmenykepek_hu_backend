@@ -10,7 +10,7 @@ class ListFiles extends ListRecords
 {
     protected static string $resource = FileResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
         ];
