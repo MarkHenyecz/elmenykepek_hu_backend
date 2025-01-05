@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Filters\DateFilter;
 use App\Filament\Resources\CharacterResource\Pages;
 use App\Filament\Resources\CharacterResource\RelationManagers;
 use App\Models\Character;
@@ -20,7 +21,6 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Webbingbrasil\FilamentDateFilter\DateFilter;
 
 class CharacterResource extends Resource
 {
@@ -48,8 +48,8 @@ class CharacterResource extends Resource
                 TextColumn::make('created_at'),
             ])
             ->filters([
-                // DateFilter::make('created_at')
-                //     ->range(),
+                DateFilter::make('created_at')
+                    ->range(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

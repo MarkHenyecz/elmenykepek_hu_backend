@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Filters\DateFilter;
 use App\Filament\Resources\FileResource\Pages;
 use App\Filament\Resources\FileResource\RelationManagers;
 use App\Models\File;
@@ -16,7 +17,6 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Webbingbrasil\FilamentDateFilter\DateFilter;
 
 class FileResource extends Resource
 {
@@ -43,8 +43,8 @@ class FileResource extends Resource
             ->filters([
                 SelectFilter::make('user')
                     ->relationship('user', 'name'),
-                // DateFilter::make('created_at')
-                //     ->range(),
+                DateFilter::make('created_at')
+                    ->range(),
             ])
             ->actions([
             ])

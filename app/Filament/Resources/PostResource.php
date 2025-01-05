@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Filters\DateFilter;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Filament\Resources\PostResource\RelationManagers\ImagesRelationManager;
@@ -19,7 +20,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Webbingbrasil\FilamentDateFilter\DateFilter;
 
 class PostResource extends Resource
 {
@@ -50,8 +50,8 @@ class PostResource extends Resource
             ->filters([
                 SelectFilter::make('character')
                     ->relationship('character', 'name'),
-                // DateFilter::make('created_at')
-                //     ->range(),
+                DateFilter::make('created_at')
+                    ->range(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
