@@ -6,9 +6,9 @@ use App\Filament\Resources\FileResource\Pages;
 use App\Filament\Resources\FileResource\RelationManagers;
 use App\Models\File;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -22,7 +22,7 @@ class FileResource extends Resource
 {
     protected static ?string $model = File::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -43,8 +43,8 @@ class FileResource extends Resource
             ->filters([
                 SelectFilter::make('user')
                     ->relationship('user', 'name'),
-                DateFilter::make('created_at')
-                    ->range(),
+                // DateFilter::make('created_at')
+                //     ->range(),
             ])
             ->actions([
             ])

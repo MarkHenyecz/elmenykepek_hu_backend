@@ -12,9 +12,9 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -26,7 +26,7 @@ class CharacterResource extends Resource
 {
     protected static ?string $model = Character::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -48,8 +48,8 @@ class CharacterResource extends Resource
                 TextColumn::make('created_at'),
             ])
             ->filters([
-                DateFilter::make('created_at')
-                    ->range(),
+                // DateFilter::make('created_at')
+                //     ->range(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

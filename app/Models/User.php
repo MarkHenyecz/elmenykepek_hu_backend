@@ -55,7 +55,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Character::class)->orderByDesc('created_at');
     }
 
-    public function canAccessFilament(): bool
+    public function canAccessPanel(\Filament\Panel $panel): bool
     {
         return str_ends_with($this->email, '@elmenykepek.hu') && $this->hasVerifiedEmail();
     }
